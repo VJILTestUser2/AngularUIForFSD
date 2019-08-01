@@ -1,0 +1,214 @@
+
+       
+  <html>
+       <head>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+       <style>
+           .bs-example{
+               margin: 20px;        
+           }
+       </style>
+       </head>
+       <body>
+       <div class="bs-example">
+           <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+                <div class="text-danger" *ngIf="error.isError">{{error.errorMessage}}</div>
+                            
+                
+               <!-- <div class="row" *ngIf="showMsgfalse">
+                  
+                  <p class="alert alert-success">
+                    <strong>Please Enter proper values.</strong> 
+                  </p>
+                </div>-->
+                <!--<div class="row" *ngIf="showMsg">
+                        
+                        <p class="alert alert-success">
+                          <strong>Project added successfully.</strong> 
+                        </p>
+                      </div>-->
+
+                   <div class="row" *ngIf="showMsgUP">
+                        
+                        <p class="alert alert-success">
+                          <strong>Project updated successfully.</strong> 
+                        </p>
+                      </div>
+
+                
+               <fieldset>
+                   <div class="form-group row">
+                       <label for="project" class="col-sm-2 col-form-label">PROJECT</label>
+                       <div class="col-sm-10">
+                           <input type="text" class="form-control" formControlName="project" placeholder="PROJECT NAME" 
+                           [ngClass]="{ 'is-invalid': submitted && f.project.errors }"/>
+                           <div *ngIf="submitted && f.project.errors" class="invalid-feedback">
+                            <div *ngIf="f.project.errors.required">Project Name is required</div>
+                        </div>
+
+                        <!--   [ngClass]="{'is-invalid': projectForm.get('project').touched && projectForm.get('project').invalid}"/>
+                           <div *ngIf="projectForm.controls.project.invalid && projectForm.controls.project.touched" class="text-danger">
+                                <small *ngIf="projectForm.controls.project.errors.required">PROJECT NAME IS REQUIRED.</small>
+                                <small *ngIf="projectForm.controls.project.errors.project">Email must be a valid email address.</small>
+                              </div>-->
+                          
+                          
+                       </div>
+                   </div>
+                   <div class="form-group row">
+                       <label for="manager" class="col-sm-2 col-form-label">MANAGER</label>
+                       <div class="col-sm-10">
+                           <input type="text" class="form-control" value="{{firstname}}" placeholder="MANAGER" disabled>&nbsp;&nbsp;
+                           <span class="input-group-btn">
+                            <button class="btn btn-primary"  (click)="openDialog()" >SEARCH</button>
+                            
+                       </span>
+                       </div>
+                       
+                   </div>
+                   
+                   <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">PRIORITY</label>
+                    <div class="col-sm-6">
+                    <input type="range" formControlName="priority" id="range_weight" value="0" min="1" max="30" oninput="range_weight_disp.value = range_weight.value"/>
+                                  
+                    <input type="text" formControlName="priority" id="range_weight_disp" placeholder="PRIORITY"
+                    [ngClass]="{ 'is-invalid': submitted && f.priority.errors }"/>
+                    <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">
+                     <div *ngIf="f.priority.errors.required">Priority is required</div>
+                 </div>
+                  </div>
+                </div>
+                   <div  class="form-group row">
+                       <!--<div class="col-sm-10 offset-sm-2">-->
+                          
+                           <div class="col-sm-6">
+                            <input type="checkbox" (change)="checkboxevent($event)"/>&nbsp;&nbsp;&nbsp;
+                            <!--  <input type="date" formControlName="start_date" value= "{{todydate}}"  />-->
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" formControlName="start_date" value= "{{todydate}}" placeholder="Choose Start date" >
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker ></mat-datepicker>
+                               
+                            </mat-form-field>
+                            
+                           
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker1" formControlName="end_date" placeholder="Choose End date">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                               
+                            </mat-form-field>
+                            <input type="text" formControlName="start_date" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" formControlName="end_date" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" formControlName="projectId" hidden/>
+                           
+                            <!--  <input type="date" formControlName="end_date"  />-->
+                          </div>
+                      <!-- </div>-->
+                   </div>
+
+                   
+                   <div class="form-group row">
+                       <div class="col-sm-10 offset-sm-2">
+                           <button type="submit" class="btn btn-primary"  *ngIf="show" (click)=add()>ADD</button>&nbsp;
+                           
+                           <button type="submit" class="btn btn-primary" *ngIf="show01" (click)=updatePro()>UPDATE</button>&nbsp;&nbsp;
+                           <button type="submit" class="btn btn-primary">RESET</button>&nbsp;
+                       </div>
+                   </div>
+                   
+               </fieldset>
+           </form>
+       </div>
+       
+       <h1> <hr></h1>
+       <!--<form [formGroup]="userForm" >-->
+           
+        
+       <!--*ngFor="let c of characters | search:'task_id':q | search: 'ParentName':pa | 
+         search:'TaskName':t | search :'Priority':p">
+       -->
+         <div [formGroup]="projectForm01">
+            <div class="row" *ngIf="UpdateMsg">
+                
+                <p class="alert alert-success">
+                  <strong>Project was Updated successfully.</strong> 
+                </p>
+              </div>
+              <div class="row" *ngIf="deleteMsg">
+                
+                <p class="alert alert-success">
+                  <strong>Project was Deleted successfully.</strong> 
+                </p>
+              </div> 
+              
+           <div class="col-sm-10">
+             <input formControlName="project" [(ngModel)]="q" type="text"  placeholder="SEARCH" />
+             <label for="sorting" class="col-sm-2 col-form-label">Sort: </label>
+             <table matSort (matSortChange)="sortData($event)">
+                           <tr>
+                             <th mat-sort-header="start_date">START DATE</th>&nbsp;&nbsp;
+                             <th mat-sort-header="end_date">END DATE</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             <th mat-sort-header="priority">PRIORITY</th>&nbsp;&nbsp;
+                             
+                             
+                           </tr>
+                         </table>        
+            </div>
+           <!-- <div class="form-group row">
+              <label for="sorting" class="col-sm-2 col-form-label">Sort: </label>
+              <button type="submit" class="btn btn-primary">START DATE</button>&nbsp;
+              <button type="submit" class="btn btn-primary">END DATE</button>&nbsp;
+              <button type="submit" class="btn btn-primary">END DATE</button>&nbsp;
+              <button type="submit" class="btn btn-primary">COMPLETE</button>&nbsp;
+            </div>-->
+   
+          <hr>
+          <form [formGroup]="projectForm01" >
+         <div *ngFor="let c of allProject | search :'project':q ">
+
+            <div>
+                <label for="Parent" class="col-sm-2 col-form-label">PROJECT: </label>
+                <label for="Parent" class="col-sm-2 col-form-label">START DATE: </label>
+                <label for="Parent" class="col-sm-2 col-form-label">END DATE: </label>
+                </div>
+               <!-- <div>count :: {{(allProject|search:project:q).length}}</div>-->
+          <input type="text" formControlName="project" value="{{c.project}}" placeholder="PROJECT" />
+          <input type="text" formControlName="start_date" value="{{c.start_date}}"  placeholder="START DATE" />
+          <input type="text" formControlName="end_date" value="{{c.end_date}}"  placeholder="END DATE" />
+          <button type="button"  class="btn btn-primary" (click)=updateProject(c)>EDIT</button>&nbsp;&nbsp;
+          <button type="button" (click)=deleteProject(c.projectId) class="btn btn-primary">SUSPEND</button><br>
+          <div>
+              <label for="Parent" class="col-sm-2 col-form-label">PRIORITY: </label>
+              <label for="Parent" class="col-sm-2 col-form-label">PROJECTS: </label>
+              <label for="Parent" class="col-sm-2 col-form-label">COMPLETED: </label>
+          </div>
+          <input type="text" formControlName="priority" value="{{c.priority}}"  placeholder="PRIORITY" />
+          <input type="text" formControlName="projectId" value="{{c.projectId}}" placeholder="ID" hidden/>
+          <input type="text" formControlName="notasks" value="{{c.notasks}}" placeholder="NO OF TASKS" />
+          <input type="text" formControlName="status_count" value="{{c.status_count}}" placeholder="COMPLETED" />
+          
+          
+          <hr>
+        </div>
+        </form>
+        <table>
+             
+           </table>
+         </div>
+
+         
+
+
+       </body>
+       </html>                     

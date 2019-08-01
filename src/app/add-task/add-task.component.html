@@ -1,0 +1,165 @@
+
+
+       
+       <html>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     
+        <style>
+            .bs-example{
+                margin: 20px;        
+            }
+        </style>
+        </head>
+        <body>
+        <div class="bs-example">
+            <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+                    <div class="row" *ngIf="showMsg">
+                            
+                            <p class="alert alert-success">
+                              <strong>Task added successfully.</strong> 
+                            </p>
+                          </div> 
+                <fieldset>
+                    <div class="form-group row">
+                        <label for="project" class="col-sm-2 col-form-label">PROJECT</label>
+                        <div class="col-sm-10">
+                            <input type="text" formControlName="projectname" class="form-control" id="inputEmail" value="{{project}}" placeholder="PROJECT NAME" disabled>&nbsp;
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary"  (click)="openDialog()" >SEARCH</button>
+                                
+                           </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="manager" class="col-sm-2 col-form-label">TASKNAME</label>
+                        <div class="col-sm-10">
+                            <input type="text" formControlName="task" class="form-control" placeholder="TASK" 
+                            [ngClass]="{ 'is-invalid': submitted && f.task.errors }"/>
+                            <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
+                             <div *ngIf="f.task.errors.required">Task Name is required</div>
+                         </div> 
+                            
+                            <!--[ngClass]="{'is-invalid': articleForm.get('task').touched && articleForm.get('task').invalid}"/>
+                            <div *ngIf="articleForm.controls.task.invalid && articleForm.controls.task.touched" class="text-danger">
+                              <small *ngIf="articleForm.controls.task.errors.required">TASK NAME IS REQUIRED.</small>
+                              <small *ngIf="articleForm.controls.task.errors.task">Email must be a valid email address.</small>&nbsp;&nbsp;
+                            </div>-->
+                        </div>
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label for="parenttask" class="col-sm-2 col-form-label">PARENT TASK</label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" (change)="checkboxevent($event)">&nbsp;&nbsp;
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="form-group row">
+                     <label class="col-sm-2 col-form-label">PRIORITY</label>
+                     <div class="col-sm-6">
+                     <input type="range" formControlName="priority" id="range_weight" value="0" min="1" max="30" oninput="range_weight_disp.value = range_weight.value"/>
+                     
+                       
+                     <input type="text" formControlName="priority" id="range_weight_disp" placeholder="priority"
+                     [ngClass]="{ 'is-invalid': submitted && f.priority.errors }"/>
+                     <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">
+                      <div *ngIf="f.priority.errors.required">Priority is required</div>
+                  </div>
+                    <!-- [ngClass]="{'is-invalid': articleForm.get('priority').touched && articleForm.get('priority').invalid}"
+                     <div *ngIf="articleForm.controls.priority.invalid && articleForm.controls.priority.touched" class="text-danger">
+                       <small *ngIf="articleForm.controls.priority.errors.required">PRIORITY NAME IS REQUIRED.</small>
+                       <small *ngIf="articleForm.controls.priority.errors.priority">Email must be a valid email address.</small>&nbsp;&nbsp;
+                     </div>-->
+                   </div>
+                 </div>
+                 <div class="form-group row">
+                        <label for="project" class="col-sm-2 col-form-label">PARENT TASK</label>
+                        <div class="col-sm-10">
+                            <input type="text"  class="form-control" id="inputEmail" placeholder="PARENT TASK" disabled>&nbsp;
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary"  (click)="openDialogParent()" >SEARCH</button>
+                                
+                           </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <label for="project" class="col-sm-2 col-form-label">USER</label>
+                            <div class="col-sm-10">
+                                <input type="text"  class="form-contro" id="inputEmail" placeholder="USER" value="{{firstname}}" disabled>&nbsp;
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary"  (click)="openDialogUser()" >SEARCH</button>
+                                    
+                               </span>
+                            </div>
+                        </div>
+                      
+                        <div  class="form-group row">
+                            <!--<div class="col-sm-10 offset-sm-2">-->
+                               
+                                    
+                                <div class="col-sm-6">
+                                 <input type="checkbox" (change)="checkboxevent01($event)"/>&nbsp;&nbsp;&nbsp;
+                                 <!--  <input type="date" formControlName="start_date" value= "{{todydate}}"  />-->
+                                 <mat-form-field>
+                                     <input matInput [matDatepicker]="picker" formControlName="startdate" placeholder="Choose Start date" disabled>
+                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                     <mat-datepicker #picker></mat-datepicker>
+                                 </mat-form-field>
+                                 <mat-form-field>
+                                     <input matInput [matDatepicker]="picker1" formControlName="enddate" placeholder="Choose End date" disabled>
+                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                     <mat-datepicker #picker1></mat-datepicker>
+                                 </mat-form-field>
+                                 <!--  <input type="date" formControlName="end_date"  />-->
+                               </div>
+                           <!-- </div>-->
+                        </div>
+                    <!--<div  class="form-group row">
+                        
+                            <label class="form-check-label">
+                                <input type="checkbox" (change)="checkboxevent01($event)"/> START&END DATE</label>
+                            <div class="col-sm-5" >
+                                 
+                               <input type="date" formControlName="startdate" disabled/>
+                               <input type="date" formControlName="enddate" disabled/>
+                           </div>
+                      
+                    </div>-->
+                    
+                   
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" class="btn btn-primary" *ngIf="showMsg02" (click)=createTask()>ADD</button>&nbsp;
+                            <button type="submit" class="btn btn-primary" *ngIf="showMsg01" (click)=createParentTask()>ADD P</button>&nbsp;
+                            <button type="submit" class="btn btn-primary">RESET</button>&nbsp;
+                        </div>
+                    </div>
+                    
+                </fieldset>
+            </form>
+           
+        </div>
+        
+        <h1> <hr></h1>
+        <!--<form [formGroup]="userForm" >-->
+            
+         
+        <!--*ngFor="let c of characters | search:'task_id':q | search: 'ParentName':pa | 
+          search:'TaskName':t | search :'Priority':p">
+        -->
+          
+          
+ 
+ 
+        </body>
+        </html>                     

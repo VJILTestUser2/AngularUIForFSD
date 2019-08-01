@@ -1,0 +1,58 @@
+input[type=text]{
+  width: 20%;
+  padding: 5px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  align-self: auto;
+  align-content: center;
+  clear: left
+ 
+}
+
+input[type=chekbox]{
+  width: 2%;
+  padding: 5px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  align-self: auto;
+  align-content: center;
+  clear: left;
+ 
+}
+
+
+label{
+  display: inline-block;
+  clear: right;
+  width: 250px;
+  text-align: right;
+  color: cadetblue
+}
+
+button{
+  width: 15%;
+  padding: 5px;
+  display: -moz-marker;
+  font: x-large;
+  border: none;
+  background: #e5a2a2;
+  background-color: cadetblue
+}
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.basic-container {
+  padding: 30px;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}

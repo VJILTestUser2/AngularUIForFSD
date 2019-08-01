@@ -1,0 +1,122 @@
+
+       
+  <html>
+       <head>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+       <app-add-task [task]="task" *ngFor="let task of allArticles"> </app-add-task>
+       </head>
+       <body>
+        
+       
+       <h1> <hr></h1>
+       <!--<form [formGroup]="userForm" >-->
+           
+        
+       <!--*ngFor="let c of characters | search:'task_id':q | search: 'ParentName':pa | 
+         search:'TaskName':t | search :'Priority':p">
+       -->
+         <div [formGroup]="articleForm01">
+         
+            <div class="row" *ngIf="UpdateMsg">
+                
+                <p class="alert alert-success">
+                  <strong>Task Updated successfully.</strong> 
+                </p>
+              </div> 
+
+              <div class="row" *ngIf="deleteMsg">
+                  
+                  <p class="alert alert-success">
+                    <strong>Task Deleted successfully.</strong> 
+                  </p>
+                </div> 
+
+                <div class="row" *ngIf="UpdateMsg">
+                    
+                    <p class="alert alert-success">
+                      <strong>Task Updated successfully Please refresh the page.</strong> 
+                    </p>
+                  </div> 
+           <div class="col-sm-10">
+
+              
+             <input formControlName="projectname" [(ngModel)]="q" type="text"  placeholder="SEARCH" hidden/>
+             <div class="form-group row">
+              <label for="project" class="col-sm-2 col-form-label">PROJECT</label>
+              <div class="col-sm-10">
+                  <input type="text" formControlName="projectname" [(ngModel)]="project" class="form-control" id="inputEmail"  placeholder="PROJECT NAME" disabled>&nbsp;
+                  <span class="input-group-btn">
+                      <button class="btn btn-primary"  (click)="openDialog()" >SEARCH</button>
+                      
+                 </span>
+              
+
+              </div>
+          </div>
+             
+             <table matSort (matSortChange)="sortData($event)">
+                           <tr>
+                             <th mat-sort-header="start_date">STARTDATE</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             <th mat-sort-header="end_date">ENDDATE</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             <th mat-sort-header="priority">PRIORITY</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             <th mat-sort-header="task">TASK</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             
+                             
+                             
+                           </tr>
+                         </table>        
+            </div>
+          
+          <hr>
+          <form [formGroup]="articleForm01"> 
+              <div class="row" *ngIf="showMsgCMP">
+                  
+                  <p class="alert alert-success">
+                    <strong>Task ended successfully.</strong> 
+                  </p>
+                </div>  
+         <div *ngFor="let c of allArticles | search :'projectname':q">
+           <!-- <p>Count : {{(allArticles|search:'projectname':q).length}}</p>-->
+           
+           
+          <div>
+          <label for="Parent" class="col-sm-2 col-form-label">PARENT: </label>
+          <label for="Parent" class="col-sm-2 col-form-label">START DATE: </label>
+          <label for="Parent" class="col-sm-2 col-form-label">END DATE: </label>
+          <label for="Parent" class="col-sm-2 col-form-label">PRIORITY: </label>
+          <label for="Parent" class="col-sm-2 col-form-label">TASK NAME: </label></div>
+          <input type="text"  placeholder="PARENT" />
+          <input type="text" formControlName="startdate" value="{{c.startdate}}"  placeholder="START DATE" />
+          <input type="text" formControlName="task_id" value="{{c.task_id}}"  placeholder="ID" hidden/>
+          
+          <input type="text" formControlName="enddate" value="{{c.enddate}}"  placeholder="END DATE" />
+          <input type="text" formControlName="priority" value="{{c.priority}}"  placeholder="PRIORITY" />
+          <input type="text" formControlName="task" value="{{c.task}}" placeholder="TASK" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         
+          <input type="text" formControlName="projectname" value="{{c.projectname}}" placeholder="ID" hidden/>
+          <input type="text" formControlName="projectname" value="{{c.pid}}" placeholder="ID" hidden/>
+          <input type="text" formControlName="projectname" value="{{c.status}}" placeholder="ID" />
+              
+          <button type="button"  class="btn btn-primary" (click)="openDialogEdit(c.task_id)">EDIT</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary" (click)="UpdateTask(c)" >ENDTASK</button>
+          <hr>
+        </div>
+        </form>
+        <table>
+             
+           </table>
+         </div>
+
+         
+
+
+       </body>
+       </html>                     

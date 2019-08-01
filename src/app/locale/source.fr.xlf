@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr" datatype="plaintext" original="ng2.template">
+    <body>
+      <!--<trans-unit id="pageH1Tag" datatype="html">
+        <source>Personal Information System</source>
+        <target>Système d'information personnel</target>
+        <note priority="1" from="description">A header</note>
+        <note priority="1" from="meaning">Screen notification</note>
+      </trans-unit>-->
+      <trans-unit id="3bea7a12d77b741eae3e4f107d10f87a95d5e419" datatype="html">
+        <source> Task Manager  </source>
+        <target>Gestionnaire des tâches</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="label1" datatype="html">
+        <source>TASK</source>
+        <target>TÂCHE</target>
+      </trans-unit>
+      <trans-unit id="label2" datatype="html">
+        <source>PARENT TASK</source>
+        <target>TÂCHE DES PARENTS</target>
+      </trans-unit>
+      <trans-unit id="label3" datatype="html">
+        <source>TASK NAME</source>
+        <target>DELA TÂCHE</target>
+      </trans-unit>
+      <trans-unit id="label4" datatype="html">
+        <source>START DATE</source>
+        <target>DATE DE DÉ BUT</target>
+      </trans-unit>
+      <trans-unit id="label5" datatype="html">
+        <source>END DATE</source>
+        <target>DATE DE FIN</target>
+      </trans-unit>
+      <trans-unit id="label6" datatype="html">
+        <source>PRIORITY</source>
+        <target>PRIORITÉ</target>
+      </trans-unit>
+      
+     <!-- <trans-unit id="columnHeaderCaptions" datatype="html">
+        <source>{VAR_SELECT, select, c,{c}}</source>
+        <target>{VAR_SELECT, select, PersonId{PersonId} 
+PersonName{Nom d'une personne} Address{Adresse} City{Ville} 
+State{Etat} Occupation{Occupation}}</target>
+      </trans-unit>-->
+    </body>
+  </file>
+</xliff>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="3bea7a12d77b741eae3e4f107d10f87a95d5e419" datatype="html">
+        <source>
+   Task Manager
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>-->

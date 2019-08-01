@@ -1,0 +1,171 @@
+<html>
+  <head>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+  </head>
+    <body><br><br>
+        <div style="text-align: center">
+           
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()"> 
+              <!--<div class="row" *ngIf="showMsg">
+                  
+                  <p class="alert alert-success">
+                    <strong>User added successfully.</strong> 
+                  </p>
+                </div>-->
+                <fieldset> 
+                  <input type="text" formControlName="id" hidden/>
+              <div class="form-group row" >
+                  <label for="firstname" class="col-sm-2 col-form-label">FIRST NAME </label>
+                  <div class="col-sm-6">
+                      <input formControlName="firstname"  type="firstname" required class="form-control" placeholder="FIRST NAME"
+                      [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"/>
+                      <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                       <div *ngIf="f.firstname.errors.required">First Name is required</div>
+                   </div>
+                     <!-- [ngClass]="{'is-invalid': userForm.get('firstname').touched && userForm.get('firstname').invalid}"
+                      <div *ngIf="userForm.controls.firstname.invalid && userForm.controls.firstname.touched" class="text-danger">
+                        <small *ngIf="userForm.controls.firstname.errors.required">FIRST NAME IS REQUIRED.</small>
+                        <small *ngIf="userForm.controls.firstname.errors.firstname">Email must be a valid email address.</small>
+                      </div>-->
+                     
+                  </div>
+              </div>  
+
+              <div class="form-group row">
+                  <label for="lastname" class="col-sm-2 col-form-label">LAST NAME </label>
+                  <div class="col-sm-6">
+                      <input formControlName="lastname" type="lastname"   class="form-control" id="fname" placeholder="LAST NAME"
+                      [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"/>
+                      <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                       <div *ngIf="f.lastname.errors.required">Last Name is required</div>
+                   </div>
+                      <!--[ngClass]="{'is-invalid': userForm.get('lastname').touched && userForm.get('lastname').invalid}"/>
+                      <div *ngIf="userForm.controls.lastname.invalid && userForm.controls.lastname.touched" class="text-danger">
+                        <small *ngIf="userForm.controls.lastname.errors.required">LAST NAME IS REQUIRED.</small>
+                        <small *ngIf="userForm.controls.lastname.errors.lastname">Email must be a valid email address.</small>
+                      </div>-->
+                  </div>
+              </div>  
+
+              <div class="form-group row">
+                  <label for="employee" class="col-sm-2 col-form-label">EMPLOYEE ID </label>
+                  <div class="col-sm-6">
+                      <input formControlName="employee" type="employee"  class="form-control" id="empid" placeholder="EMPLOYEE ID"
+                      [ngClass]="{ 'is-invalid': submitted && f.employee.errors }"/>
+                      <div *ngIf="submitted && f.employee.errors" class="invalid-feedback">
+                       <div *ngIf="f.employee.errors.required">Employee is required</div>
+                   </div>
+                      <!--[ngClass]="{'is-invalid': userForm.get('employee').touched && userForm.get('employee').invalid}"/>
+                      <div *ngIf="userForm.controls.employee.invalid && userForm.controls.employee.touched" class="text-danger">
+                        <small *ngIf="userForm.controls.employee.errors.required">EMPLOYEE ID IS REQUIRED.</small>
+                        <small *ngIf="userForm.controls.employee.errors.employee">Email must be a valid email address.</small>
+                      </div>-->
+                  </div>
+              </div>  
+             
+              <div class="form-group row">
+                  <div class="col-sm-10 offset-sm-2">
+                     <!-- <button >ADD USER</button>&nbsp;
+                      <button >RESET USER</button>-->
+                      <button type="submit" class="btn btn-primary" *ngIf="show" (click)=createUser()>ADD USER</button>&nbsp;&nbsp;
+                      <button type="submit" class="btn btn-primary" *ngIf="show01" (click)=updateUsers()>UPDATE USER</button>&nbsp;&nbsp;
+                      <button type="submit" class="btn btn-primary" (click)=reset()>RESET USER</button>&nbsp;&nbsp;
+                      
+                      
+                  </div>
+              </div>   
+         </fieldset>
+          </form>  
+         
+      </div>
+     <h1> <hr></h1>
+    <!--<form [formGroup]="userForm" >-->
+        
+     
+    <!--*ngFor="let c of characters | search:'task_id':q | search: 'ParentName':pa | 
+      search:'TaskName':t | search :'Priority':p">
+    -->
+      <div>
+        <div [formGroup]="userForm01">
+            <div class="row" *ngIf="UpdateMsg">
+                
+                <p class="alert alert-success">
+                  <strong>User Updated successfully.</strong> 
+                </p>
+              </div> 
+              <div class="row" *ngIf="DeleteMsg">
+                  
+                  <p class="alert alert-success">
+                    <strong>User Deleted successfully.</strong> 
+                  </p>
+                </div> 
+          <input formControlName="firstname" [(ngModel)]="q" type="text"  placeholder="SEARCH" />
+          <label for="sorting" class="col-sm-2 col-form-label">Sort: </label>
+            <table matSort (matSortChange)="sortData($event)">
+                          <tr>
+                            <th mat-sort-header="firstname">FIRSTNAME</th>&nbsp;&nbsp;
+                            <th mat-sort-header="lastname"> LASTTNAME</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <th mat-sort-header="employee"> EMPLOYEE</th>&nbsp;&nbsp;
+                            
+                          </tr>
+                        </table>        
+                    </div>   
+               
+                <!--  <button >LAST NAME</button>&nbsp;
+                    (ngSubmit) = "onClickSubmit()"
+                  <button >ID</button>-->
+            
+
+       <hr>
+       <form [formGroup]="userForm01" > 
+       <div *ngFor="let c of allUsers | search :'firstname':q ">
+       <input type="text" formControlName="firstname"  value="{{c.firstname}}"   placeholder="FIRST NAME" />
+       <input type="text" formControlName="lastname"    value="{{c.lastname}}" placeholder="LAST NAME" />
+       <input type="text" formControlName="employee"  value="{{c.employee}}"  placeholder="EMPLOYEE ID" />
+       <button type="submit" class="btn btn-primary" (click)=updateTask(c)>EDIT</button>&nbsp;&nbsp;
+       <button type="submit" class="btn btn-primary" (click)=deleteUsers(c.id)>DELETE</button>
+       <!--<button type="button" (click)=deleteUsers(c.id) class="btn">DELETE</button>-->
+     </div>
+     </form>
+      
+    
+         <!-- <tr>
+            <th  scope="col" >TASK</th>
+            <th  scope="col">PARENT TASK</th>
+            <th  scope="col">TASK NAME</th>
+            <th  scope="col">PRIORITY</th>
+            <th  scope="col">START DATE</th>
+            <th  scope="col">END DATE</th>
+          </tr>
+          <tr>
+            
+              <td><input formControlName= "task_id" disabled="task_id" type="textarea" id="tid" value="{{c.task_id}}"/> </td>
+              <td><input formControlName= "parentid" type="textarea" id= "pid" value="{{c.ParentName}}"></td>
+              <td><input formControlName= "task" type="textarea" id="ta" value="{{c.TaskName}}"></td>
+              <td><input formControlName= "priority" type="textarea" id="pri" value="{{c.Priority}}"></td>
+              <td><input formControlName= "startdate" type="textarea" id="sd" value="{{c.StartDate}}"></td>
+              <td><input formControlName= "enddate" type="textarea" id="ed" value="{{c.EndDate}}"></td>&nbsp;
+          -->
+           <!-- <td><input formControlName= "task_id" disabled="task_id" type="textarea" id="tid" value="{{item.task_id}}"/> </td>
+            <td><input formControlName= "parentid" type="textarea" id= "pid" value="{{item.parentid}}"></td>
+            <td><input formControlName= "task" type="textarea" id="ta" value="{{item.task}}"></td>
+            <td><input formControlName= "priority" type="textarea" id="pri" value="{{item.priority}}"></td>
+            <td><input formControlName= "startdate" type="textarea" id="sd" value="{{item.startdate}}"></td>
+            <td><input formControlName= "enddate" type="textarea" id="ed" value="{{item.enddate}}"></td>&nbsp;-->
+            <!--<td><button (click)=updateTask(item) >EDIT</button></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <td><button  (click)=taskEnd()>END TASK</button></td>
+          
+          </tr>
+        -->
+     
+      
+          
+       
+      </div>
+     <!-- </div>-->
+   <!-- </form>-->
+    </body>
+  
+  </html>
+
+  

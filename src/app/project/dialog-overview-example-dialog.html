@@ -1,0 +1,24 @@
+
+
+
+
+<h1 mat-dialog-title></h1>
+<div mat-dialog-content>
+  <p>LIST OF MANAGERS</p>
+  
+  
+  <mat-form-field>
+    <mat-select [(ngModel)]="data">
+      <mat-option [value]=null>NONE</mat-option>
+      <mat-option *ngFor="let c of allUsers" [value]="c.firstname" >{{c.firstname}}</mat-option>
+      </mat-select>
+    </mat-form-field>   
+    <!--<button mat-button (click)="onNoClick01()" value="{{c.firstname}}" id="user">{{c.firstname}}</button>-->
+    <button mat-button [mat-dialog-close] cdkFocusInitial (click)="onNoClick()">Ok</button>
+
+</div>
+<div mat-dialog-actions>
+ <!-- <button mat-button (onclick)="onNoClick()">Select any one User</button>-->
+  
+ <!-- <button mat-button [mat-dialog-close]="c.firstname" cdkFocusInitial>Select any one User</button>-->
+</div>
